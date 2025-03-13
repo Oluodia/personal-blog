@@ -4,7 +4,6 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
-use Dom\Comment;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');

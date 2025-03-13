@@ -27,7 +27,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return route('home');
+        return redirect()->route('home');
     }
 
     public function showUpdate()
@@ -42,7 +42,7 @@ class PostController extends Controller
             'title' => $request->title,
             'content' => $request->content,
         ]);
-        return route('home');
+        return redirect()->route('home');
     }
 
     public function destroy(Request $request)
@@ -51,6 +51,6 @@ class PostController extends Controller
         Comment::where('post_id', $post->id)->delete();
         $post->delete();
 
-        return route('posts.edit');
+        return redirect()->route('posts.edit');
     }
 }
