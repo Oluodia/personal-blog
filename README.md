@@ -8,10 +8,17 @@
 </p>
 
 ## Install
+
+- Customize the .env
+
 ```
 compser upload
 ```
-- Customize the .env
+
+```
+npm install
+```
+
 ```
 npm run build
 ```
