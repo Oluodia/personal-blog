@@ -12,16 +12,15 @@
 - Customize the .env
 
 ```
-compser upload
+composer update
 ```
 
 ```
-npm install
+php artisan app:project-customization
 ```
 
-```
-npm run build
-```
+## Commands
+
 To create owner accout, use command:
 ```
 php artisan app:create-owner-account
