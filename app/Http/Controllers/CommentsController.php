@@ -8,9 +8,8 @@ use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::find($id);
         return view('posts.post', compact('post'));
     }
 
@@ -24,9 +23,9 @@ class CommentsController extends Controller
         return back();
     }
 
-    public function destroy($id)
+    public function destroy(Comment $comment)
     {
-        Comment::find($id)->first()->delete();
+        $comment->first()->delete();
         return back();
     }
 }

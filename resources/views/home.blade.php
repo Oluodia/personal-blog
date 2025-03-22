@@ -17,7 +17,7 @@
 
 				<p class="mt-4">{{ Str::limit($post->content, 100) }}</p>
 
-				<a href="{{ route('posts.post', ['id' => $post->id]) }}"
+				<a href="{{ route('posts.post', ['post' => $post->id]) }}"
 					class="text-indigo-600 hover:underline mt-4 inline-block">Читать далее</a>
 			</section>
 		@endforeach
