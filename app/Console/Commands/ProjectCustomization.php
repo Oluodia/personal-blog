@@ -29,6 +29,7 @@ class ProjectCustomization extends Command
             'npm install',
             'php artisan key:generate',
             'npm run build',
+            'php artisan migrate'
         ];
 
         foreach ($commands as $command) {

@@ -10,6 +10,7 @@
 ## Install
 
 - Customize the .env
+- Create a "personal_blog" database in MySQL or change the name in .env
 
 ```
 composer update
