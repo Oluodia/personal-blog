@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Repositories\CommentRepository;
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
+
+    private $commentRepository;
+
+    public function __construct(CommentRepository $commentRepository)
+    {
+        $this->commentRepository = $commentRepository;
+    }
     public function show(Post $post)
     {
         return view('posts.post', compact('post'));
@@ -15,17 +23,17 @@ class CommentsController extends Controller
 
     public function store(Request $request, Post $post)
     {
-        $post->comments()->create([
+        $this->commentRepository->createComment([
             'comment' => $request->content,
             'name' => $request->name,
-        ]);
+        ], $post);
 
         return back();
     }
 
     public function destroy(Comment $comment)
     {
-        $comment->first()->delete();
+        $this->commentRepository->deleteComment($comment);
         return back();
     }
 }

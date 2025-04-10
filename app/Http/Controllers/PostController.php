@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
-use App\Models\Post;
+use App\Repositories\PostRepository;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    private $postRepository;
+
+    public function __construct(PostRepository $postRepository)
+    {
+        $this->postRepository = $postRepository;
+    }
+
     public function edit()
     {
         return view('posts.edit');
@@ -19,37 +25,35 @@ class PostController extends Controller
             'title' => 'unique:posts',
         ]);
 
-        $post = Post::create([
+        $this->postRepository->createPost([
             'title' => $request->title,
             'content' => $request->content,
             'author' => auth()->user()->name,
         ]);
-
-        $post->save();
 
         return redirect()->route('home');
     }
 
     public function showUpdate()
     {
-        $post = Post::where('title', $_GET['title'])->first();
+        $post = $this->postRepository->find('title', $_GET['title']);
+
         return view('posts.update-post', compact('post'));
     }
 
     public function update(Request $request)
     {
-        Post::find($request->_id)->update([
+        $this->postRepository->updatePost($request->_id, [
             'title' => $request->title,
             'content' => $request->content,
         ]);
+
         return redirect()->route('home');
     }
 
     public function destroy(Request $request)
     {
-        $post = Post::where('title', $request->title)->first();
-        Comment::where('post_id', $post->id)->delete();
-        $post->delete();
+        $this->postRepository->deletePost('title', $request->title);
 
         return redirect()->route('posts.edit');
     }
