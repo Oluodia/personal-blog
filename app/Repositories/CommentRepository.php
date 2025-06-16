@@ -4,9 +4,10 @@ namespace App\Repositories;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Repositories\Interface\CommentRepositoryInterface;
 use Exception;
 
-class CommentRepository
+class CommentRepository implements CommentRepositoryInterface
 {
 	public function createComment(array $data, Post $post)
 	{

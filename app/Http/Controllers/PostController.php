@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\PostRepository;
+use App\Http\Requests\PostRequest;
+use App\Repositories\Interface\PostRepositoryInterface;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    private $postRepository;
 
-    public function __construct(PostRepository $postRepository)
+    public function __construct(private PostRepositoryInterface $postRepository)
     {
-        $this->postRepository = $postRepository;
     }
 
     public function edit()
@@ -19,11 +18,8 @@ class PostController extends Controller
         return view('posts.edit');
     }
 
-    public function create(Request $request)
+    public function create(PostRequest $request)
     {
-        $request->validate([
-            'title' => 'unique:posts',
-        ]);
 
         $this->postRepository->createPost([
             'title' => $request->title,
@@ -38,10 +34,14 @@ class PostController extends Controller
     {
         $post = $this->postRepository->find('title', $_GET['title']);
 
+        if(!$post) {
+            return back();
+        }
+
         return view('posts.update-post', compact('post'));
     }
 
-    public function update(Request $request)
+    public function update(PostRequest $request)
     {
         $this->postRepository->updatePost($request->_id, [
             'title' => $request->title,

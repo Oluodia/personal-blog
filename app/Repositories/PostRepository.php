@@ -4,9 +4,10 @@ namespace App\Repositories;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Repositories\Interface\PostRepositoryInterface;
 use Exception;
 
-class PostRepository
+class PostRepository implements PostRepositoryInterface
 {
 	public function createPost(array $data)
 	{
@@ -44,6 +45,10 @@ class PostRepository
 
 		try {
 			$post = $this->find($column, $operator);
+			
+			if(!$post) {
+				return back();
+			}
 
 			Comment::where('post_id', $post->id)->delete();
 
