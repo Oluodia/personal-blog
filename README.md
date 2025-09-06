@@ -48,7 +48,8 @@ php artisan app:create-owner-account
  
 ## Screenshots
 
-<img width="1920" height="1004" alt="image" src="https://github.com/user-attachments/assets/3821f322-a5a1-4086-ac57-629e3e412405" />
+<img width="1918" height="1002" alt="image" src="https://github.com/user-attachments/assets/57799454-f656-458c-b6a3-729de5219b1b" />
+
 <img width="1920" height="1003" alt="image" src="https://github.com/user-attachments/assets/3b5a84d5-b659-426d-90cc-de3ff30329d3" />
 <img width="1919" height="1000" alt="image" src="https://github.com/user-attachments/assets/2ba09ba3-62c5-4a02-9874-7d89dfe4ca31" />
 <img width="1920" height="1001" alt="image" src="https://github.com/user-attachments/assets/b47b7ccf-6653-454d-b703-99432bf0df8d" />
