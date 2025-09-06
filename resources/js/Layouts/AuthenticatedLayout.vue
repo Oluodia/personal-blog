@@ -12,22 +12,27 @@ const user = computed(() => {
 </script>
 
 <template>
-    <Header>
-        <li>
-            <Link :href="route('posts.edit')" class="hover:text-indigo-200">
-                Редактор блога
-            </Link>
-        </li>
-        <li>
-            <Link :href="route('profile.edit')" class="hover:text-indigo-200">
-                {{ user["name"] }}
-            </Link>
-        </li>
-    </Header>
+    <div class="min-h-screen flex flex-col">
+        <Header>
+            <li>
+                <Link :href="route('posts.edit')" class="hover:text-indigo-200">
+                    Редактор блога
+                </Link>
+            </li>
+            <li>
+                <Link
+                    :href="route('profile.edit')"
+                    class="hover:text-indigo-200"
+                >
+                    {{ user["name"] }}
+                </Link>
+            </li>
+        </Header>
 
-    <main class="flex-grow container mx-auto px-4 py-8">
-        <slot />
-    </main>
+        <main class="flex-grow container mx-auto px-4 py-8 pt-24 pb-8">
+            <slot />
+        </main>
 
-    <Footer />
+        <Footer />
+    </div>
 </template>

@@ -3,7 +3,9 @@ import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
-    <header class="text-white border-b border-gray-700">
+    <header
+        class="text-white border-b border-gray-700 fixed inset-x-0 top-0 bg-gray-900 z-40"
+    >
         <div
             class="container mx-auto px-4 py-6 flex justify-between items-center"
         >
