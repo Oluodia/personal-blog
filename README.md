@@ -20,6 +20,14 @@ composer update
 php artisan app:project-customization
 ```
 
+To start the project, you need to run these two commands simultaneously:
+```
+php artisan serve
+```
+```
+npm run dev
+```
+
 ## Commands
 
 To create owner accout, use command:
@@ -40,10 +48,11 @@ php artisan app:create-owner-account
  
 ## Screenshots
 
-![image](https://github.com/user-attachments/assets/86052344-61ef-456d-9991-2b13a84f7fe8)
-![image](https://github.com/user-attachments/assets/aaf14d8c-9ee7-4ab8-8b30-b4273132121b)
-![image](https://github.com/user-attachments/assets/4472aefe-1109-4f7c-b346-85d1cd65f5fc)
-![image](https://github.com/user-attachments/assets/1cf2d436-89f5-405f-b2b5-8982ea29ecc3)
+<img width="1920" height="1004" alt="image" src="https://github.com/user-attachments/assets/3821f322-a5a1-4086-ac57-629e3e412405" />
+<img width="1920" height="1003" alt="image" src="https://github.com/user-attachments/assets/3b5a84d5-b659-426d-90cc-de3ff30329d3" />
+<img width="1919" height="1000" alt="image" src="https://github.com/user-attachments/assets/2ba09ba3-62c5-4a02-9874-7d89dfe4ca31" />
+<img width="1920" height="1001" alt="image" src="https://github.com/user-attachments/assets/b47b7ccf-6653-454d-b703-99432bf0df8d" />
+
 
 
 
@@ -51,4 +60,4 @@ php artisan app:create-owner-account
 
 ## Technology
 
-Laravel|Laravel Breeze|Tailwind|Eloquent ORM|
+Laravel|Laravel Breeze|Tailwind|Eloquent ORM|Vue.js|Inertia.js
