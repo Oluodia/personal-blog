@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\Post;
 use App\Repositories\Interface\CommentRepositoryInterface;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CommentsController extends Controller
 {
@@ -15,22 +16,26 @@ class CommentsController extends Controller
     }
     public function show(Post $post)
     {
-        return view('posts.post', compact('post'));
+        return Inertia::render('Posts/Post', [
+            'post' => $post,
+            'comments' => Comment::where('post_id', $post->id)->latest()->get(),
+            'isAuth' => auth()->user() ? true : false
+        ]);
     }
 
-    public function store(Request $request, Post $post)
+    public function store(Post $post, Request $request)
     {
         $this->commentRepository->createComment([
             'comment' => $request->content,
             'name' => $request->name,
         ], $post);
 
-        return back();
+        return redirect()->route('posts.post', $post->id);
     }
 
-    public function destroy(Comment $comment)
+    public function destroy(Comment $comment, Post $post)
     {
         $this->commentRepository->deleteComment($comment);
-        return back();
+        return redirect()->route('posts.post', $post->id);
     }
 }

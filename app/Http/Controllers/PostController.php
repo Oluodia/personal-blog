@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Http\Requests\UpdatePostRequest;
+use App\Models\Post;
 use App\Repositories\Interface\PostRepositoryInterface;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PostController extends Controller
 {
@@ -15,7 +18,10 @@ class PostController extends Controller
 
     public function edit()
     {
-        return view('posts.edit');
+
+        return Inertia::render('Posts/Edit', [
+            'posts' => Post::select('id', 'title')->get()->toArray()
+        ]);
     }
 
     public function create(PostRequest $request)
@@ -30,20 +36,22 @@ class PostController extends Controller
         return redirect()->route('home');
     }
 
-    public function showUpdate()
+    public function showUpdate(Request $request)
     {
-        $post = $this->postRepository->find('title', $_GET['title']);
+        $post = $this->postRepository->find('title', $request->title);
 
         if(!$post) {
             return back();
         }
 
-        return view('posts.update-post', compact('post'));
+        return Inertia::render('Posts/UpdatePost', [
+            'post' => $post
+        ]);
     }
 
-    public function update(PostRequest $request)
+    public function update(UpdatePostRequest $request)
     {
-        $this->postRepository->updatePost($request->_id, [
+        $this->postRepository->updatePost($request->id, [
             'title' => $request->title,
             'content' => $request->content,
         ]);

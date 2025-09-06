@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PostRequest extends FormRequest
 {
@@ -21,8 +22,9 @@ class PostRequest extends FormRequest
      */
     public function rules(): array
     {
+        $postId = $this->input('id');
         return [
-            'title' => 'unique:posts'
+            'title' => 'unique:posts', Rule::unique('posts')->ignore($postId),
         ];
     }
 }

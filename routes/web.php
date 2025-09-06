@@ -5,20 +5,30 @@ use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
-Route::view('/', 'home')
-    ->name('home');
+// Main Pages
+Route::get('/', function () {
+    return Inertia::render('Home', [
+        'posts' => DB::table('posts')->latest()->get()
+    ]);
+})->name('home');
 
-Route::view('/about', 'about')
+Route::inertia('/about', 'About')
     ->name('about');
 
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
+
+// Show Post
 Route::get('/post/{post}', [CommentsController::class, 'show'])
     ->name('posts.post');
 
+// Create Comment
 Route::post('/post/{post}', [CommentsController::class, 'store'])
     ->name('comments.store');
 
 Route::middleware('auth')->group(function () {
+    // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])
         ->name('profile.edit');
 
@@ -28,8 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
 
-    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+    Route::post('/profile', [AuthenticatedSessionController::class, 'destroy'])->name('profile.logout');
 
+    // Posts
     Route::get('/posts', [PostController::class, 'edit'])
         ->name('posts.edit');
     Route::post('/posts', [PostController::class, 'create'])
@@ -41,7 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/posts', [PostController::class, 'destroy'])
         ->name('posts.destroy');
 
-    Route::delete('/post/{comment}', [CommentsController::class, 'destroy'])->name('comments.destroy');
+    Route::delete('/post/{comment}/{post}', [CommentsController::class, 'destroy'])->name('comments.destroy');
 });
 
 require __DIR__ . '/auth.php';
